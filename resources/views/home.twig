@@ -21,9 +21,7 @@
     <!-- Navbar -->
     <nav class="hp-nav" id="hp-nav">
       <div class="hp-nav-inner">
-        <a href="{{ url('/') }}" class="hp-nav-brand">
-          <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="hp-nav-logo">
-        </a>
+        <a href="{{ url('/') }}" class="hp-nav-brand">{{ site_name }}</a>
 
         <ul class="hp-nav-links" id="hp-nav-links">
           <li><a href="{{ url('/') }}" class="active">首页</a></li>
@@ -169,9 +167,7 @@
       <div class="hp-container">
         <div class="hp-footer-grid">
           <div class="hp-footer-brand">
-            <a href="{{ url('/') }}" class="hp-nav-brand" style="margin-bottom:1rem;">
-              <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="hp-footer-logo">
-            </a>
+            <a href="{{ url('/') }}" class="hp-nav-brand" style="margin-bottom:1rem;">{{ site_name }}</a>
             <p>{{ site_description }}</p>
           </div>
 
