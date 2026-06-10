@@ -201,20 +201,24 @@ a:hover {
    ============================================ */
 .main-sidebar,
 .sidebar-dark-primary {
-  background: #1c1c1c !important;
+  background: var(--heleguo-bg-secondary) !important;
+  border-right: 1px solid var(--heleguo-border-color) !important;
+  box-shadow: none !important;
 }
 .dark-mode .main-sidebar,
 .dark-mode .sidebar-dark-primary {
-  background: #111111 !important;
+  background: #1a1a1a !important;
+  border-right-color: rgba(255, 255, 255, 0.06) !important;
 }
 
 /* Sidebar 品牌区 */
 .brand-link {
-  background: #1c1c1c !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: var(--heleguo-bg-secondary) !important;
+  border-bottom: 1px solid var(--heleguo-border-color) !important;
 }
 .dark-mode .brand-link {
-  background: #111111 !important;
+  background: #1a1a1a !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
 }
 .brand-text {
   color: var(--heleguo-orange) !important;
@@ -224,31 +228,40 @@ a:hover {
 
 /* Sidebar 用户面板 */
 .user-panel .info a {
+  color: var(--heleguo-text-primary) !important;
+  font-weight: 500;
+}
+.dark-mode .user-panel .info a {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* Sidebar 导航项 */
 .nav-sidebar > .nav-item > .nav-link {
-  color: rgba(255, 255, 255, 0.65) !important;
+  color: var(--heleguo-text-secondary) !important;
   border-radius: 8px !important;
   margin: 2px 8px !important;
   padding: 10px 12px !important;
+  font-size: 14px !important;
   transition: all 0.2s ease !important;
 }
 .nav-sidebar > .nav-item > .nav-link:hover {
   color: var(--heleguo-orange) !important;
-  background: rgba(255, 107, 53, 0.12) !important;
+  background: rgba(255, 107, 53, 0.08) !important;
 }
 .nav-sidebar > .nav-item > .nav-link.active {
   color: var(--heleguo-orange) !important;
-  background: rgba(255, 107, 53, 0.18) !important;
+  background: rgba(255, 107, 53, 0.12) !important;
   font-weight: 600 !important;
 }
 
 /* Sidebar 导航图标 */
 .nav-sidebar .nav-icon {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: var(--heleguo-text-muted) !important;
+  font-size: 14px !important;
   transition: color 0.2s ease;
+}
+.dark-mode .nav-sidebar .nav-icon {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 .nav-sidebar > .nav-item > .nav-link:hover .nav-icon,
 .nav-sidebar > .nav-item > .nav-link.active .nav-icon {
@@ -260,22 +273,30 @@ a:hover {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid var(--heleguo-border-color);
+}
+.dark-mode .user-panel .bs-avatar {
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Sidebar 导航标头 */
 .nav-sidebar .nav-header {
-  color: rgba(255, 255, 255, 0.35) !important;
+  color: var(--heleguo-text-muted) !important;
   font-size: 11px !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   padding: 12px 16px 4px !important;
+  opacity: 0.7;
 }
 
 /* Sidebar 子菜单 */
+.nav-sidebar .nav-treeview {
+  background: transparent !important;
+}
 .nav-sidebar .nav-treeview .nav-link {
-  color: rgba(255, 255, 255, 0.55) !important;
+  color: var(--heleguo-text-muted) !important;
   padding-left: 36px !important;
+  font-size: 13px !important;
 }
 .nav-sidebar .nav-treeview .nav-link:hover {
   color: var(--heleguo-orange) !important;
