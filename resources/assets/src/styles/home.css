@@ -358,12 +358,10 @@ body {
    Footer - 首页风格
    ============================================ */
 .home-footer {
-  background: #1a1a1a;
-  color: #ccc;
+  background: var(--heleguo-bg-card);
+  color: var(--heleguo-text-secondary);
   padding: 60px 0 0;
-}
-.dark-mode .home-footer {
-  background: #0a0a0a;
+  border-top: 1px solid var(--heleguo-border-color);
 }
 .home-footer-logo {
   height: 36px;
@@ -372,14 +370,14 @@ body {
 }
 .home-footer-desc {
   font-size: 14px;
-  color: #999;
+  color: var(--heleguo-text-muted);
   line-height: 1.6;
   max-width: 300px;
 }
 .home-footer-heading {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: var(--heleguo-text-primary);
   margin-bottom: 20px;
 }
 .home-footer-links {
@@ -391,7 +389,7 @@ body {
   margin-bottom: 10px;
 }
 .home-footer-links a {
-  color: #999;
+  color: var(--heleguo-text-muted);
   font-size: 14px;
   transition: color 0.2s ease;
 }
@@ -400,25 +398,17 @@ body {
   text-decoration: none;
 }
 .home-footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--heleguo-border-color);
   padding: 20px 0;
   margin-top: 40px;
+  text-align: center;
 }
 .home-footer-bottom .copyright-text {
-  color: #999;
+  color: var(--heleguo-text-muted);
   font-size: 13px;
 }
 .home-footer-bottom .copyright-text a {
   color: var(--heleguo-orange);
-}
-.home-footer-beian {
-  color: #666;
-  font-size: 12px;
-  transition: color 0.2s ease;
-}
-.home-footer-beian:hover {
-  color: var(--heleguo-orange);
-  text-decoration: none;
 }
 
 /* ============================================

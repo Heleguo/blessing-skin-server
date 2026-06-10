@@ -199,36 +199,92 @@ a:hover {
 /* ============================================
    Sidebar 样式 - 覆盖 AdminLTE
    ============================================ */
-.main-sidebar {
-  background: var(--heleguo-bg-secondary) !important;
-}
-.dark-mode .main-sidebar {
-  background: #1a1a1a !important;
-}
+.main-sidebar,
 .sidebar-dark-primary {
-  background: var(--heleguo-bg-secondary) !important;
+  background: #1c1c1c !important;
 }
-.nav-sidebar > .nav-item > .nav-link {
-  color: var(--heleguo-text-secondary) !important;
+.dark-mode .main-sidebar,
+.dark-mode .sidebar-dark-primary {
+  background: #111111 !important;
 }
-.nav-sidebar > .nav-item > .nav-link:hover {
-  color: var(--heleguo-orange) !important;
-  background: rgba(255, 107, 53, 0.1) !important;
-}
-.nav-sidebar > .nav-item > .nav-link.active {
-  color: var(--heleguo-orange) !important;
-  background: rgba(255, 107, 53, 0.15) !important;
-}
+
+/* Sidebar 品牌区 */
 .brand-link {
-  background: var(--heleguo-bg-secondary) !important;
-  border-bottom: 1px solid var(--heleguo-border-color) !important;
+  background: #1c1c1c !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 .dark-mode .brand-link {
-  background: #1a1a1a !important;
+  background: #111111 !important;
 }
 .brand-text {
   color: var(--heleguo-orange) !important;
   font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+/* Sidebar 用户面板 */
+.user-panel .info a {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Sidebar 导航项 */
+.nav-sidebar > .nav-item > .nav-link {
+  color: rgba(255, 255, 255, 0.65) !important;
+  border-radius: 8px !important;
+  margin: 2px 8px !important;
+  padding: 10px 12px !important;
+  transition: all 0.2s ease !important;
+}
+.nav-sidebar > .nav-item > .nav-link:hover {
+  color: var(--heleguo-orange) !important;
+  background: rgba(255, 107, 53, 0.12) !important;
+}
+.nav-sidebar > .nav-item > .nav-link.active {
+  color: var(--heleguo-orange) !important;
+  background: rgba(255, 107, 53, 0.18) !important;
+  font-weight: 600 !important;
+}
+
+/* Sidebar 导航图标 */
+.nav-sidebar .nav-icon {
+  color: rgba(255, 255, 255, 0.5) !important;
+  transition: color 0.2s ease;
+}
+.nav-sidebar > .nav-item > .nav-link:hover .nav-icon,
+.nav-sidebar > .nav-item > .nav-link.active .nav-icon {
+  color: var(--heleguo-orange) !important;
+}
+
+/* Sidebar 用户头像 */
+.user-panel .bs-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Sidebar 导航标头 */
+.nav-sidebar .nav-header {
+  color: rgba(255, 255, 255, 0.35) !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  padding: 12px 16px 4px !important;
+}
+
+/* Sidebar 子菜单 */
+.nav-sidebar .nav-treeview .nav-link {
+  color: rgba(255, 255, 255, 0.55) !important;
+  padding-left: 36px !important;
+}
+.nav-sidebar .nav-treeview .nav-link:hover {
+  color: var(--heleguo-orange) !important;
+}
+
+/* Sidebar 徽章 */
+.nav-sidebar .badge {
+  background: var(--heleguo-orange) !important;
+  color: #fff !important;
 }
 
 /* ============================================
