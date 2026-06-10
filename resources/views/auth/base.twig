@@ -8,7 +8,10 @@
   <body class="{{ dark_mode ? 'dark-mode' : '' }} hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="{{ url('/') }}">{{ site_name }}</a>
+        <a href="{{ url('/') }}">
+          <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="auth-logo-img">
+          <span>{{ site_name }}</span>
+        </a>
       </div>
 
       <div class="card">

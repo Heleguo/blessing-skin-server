@@ -176,6 +176,7 @@ a { text-decoration: none; color: inherit; }
 .hp-nav-brand {
   display: flex;
   align-items: center;
+  gap: 10px;
   font-family: Minecraft, sans-serif;
   font-size: 1.25rem;
   color: var(--text-primary);
@@ -183,6 +184,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 .hp-nav-brand:hover { opacity: 0.8; }
+
+.hp-nav-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
 
 .hp-nav-links {
   display: flex;
