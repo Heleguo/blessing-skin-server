@@ -347,7 +347,7 @@ a { text-decoration: none; color: inherit; }
 .hp-hero-bg .hp-hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 50%, var(--bg-primary));
+  background: linear-gradient(to bottom, transparent 40%, var(--bg-secondary));
 }
 
 .hp-hero-particles {
