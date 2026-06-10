@@ -155,12 +155,32 @@ a:hover {
    ============================================ */
 .main-header.navbar {
   transition: all 0.3s ease;
+  border-bottom: 1px solid var(--heleguo-border-color) !important;
+  background: var(--heleguo-navbar-bg) !important;
+}
+.dark-mode .main-header.navbar {
+  background: rgba(26, 26, 26, 0.95) !important;
+}
+.main-header.navbar .nav-link {
+  color: var(--heleguo-text-secondary) !important;
+  transition: color 0.2s ease;
+}
+.main-header.navbar .nav-link:hover {
+  color: var(--heleguo-orange) !important;
 }
 .navbar-lightblue {
   background-color: var(--heleguo-orange) !important;
 }
 .navbar-white {
   background-color: var(--heleguo-navbar-bg) !important;
+}
+
+/* 皮肤库导航栏品牌名 */
+.skinlib-brand {
+  font-family: 'Inter Tight', sans-serif !important;
+  font-weight: 800 !important;
+  color: var(--heleguo-orange) !important;
+  font-size: 20px !important;
 }
 
 /* 导航栏链接 */
@@ -300,19 +320,24 @@ a:hover {
 }
 
 /* ============================================
-   Footer 样式
+   Footer 样式 - 内部页面使用
    ============================================ */
 .main-footer {
-  background: var(--heleguo-footer-bg) !important;
-  color: #ccc !important;
-  border-top: none !important;
-  padding: 40px 0 !important;
+  background: var(--heleguo-bg-secondary) !important;
+  color: var(--heleguo-text-muted) !important;
+  border-top: 1px solid var(--heleguo-border-color) !important;
+  padding: 16px 0 !important;
+  font-size: 13px;
 }
 .main-footer a {
   color: var(--heleguo-orange) !important;
 }
 .main-footer a:hover {
   color: #e55a2b !important;
+}
+.main-footer #copyright-text {
+  color: var(--heleguo-text-muted);
+  font-size: 13px;
 }
 
 /* ============================================
@@ -390,9 +415,35 @@ a.text-primary:focus {
 }
 
 /* Dropdown */
+.dropdown-menu {
+  background: var(--heleguo-bg-card) !important;
+  border: 1px solid var(--heleguo-border-color) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+.dark-mode .dropdown-menu {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+.dropdown-item {
+  color: var(--heleguo-text-secondary) !important;
+  font-size: 14px;
+  padding: 8px 16px !important;
+  transition: all 0.2s ease;
+}
 .dropdown-item:hover,
 .dropdown-item:focus {
   background-color: rgba(255, 107, 53, 0.1) !important;
+  color: var(--heleguo-orange) !important;
+}
+.dropdown-divider {
+  border-color: var(--heleguo-border-color) !important;
+}
+
+.user-menu .nav-link {
+  color: var(--heleguo-text-secondary) !important;
+  transition: color 0.2s ease;
+}
+.user-menu .nav-link:hover {
   color: var(--heleguo-orange) !important;
 }
 
@@ -536,10 +587,6 @@ a.text-primary:focus {
 /* ============================================
    AdminLTE 暗色模式增强
    ============================================ */
-body.dark-mode .main-header.navbar {
-  background-color: #1a1a1a !important;
-  border-bottom-color: #333 !important;
-}
 body.dark-mode .content-wrapper {
   background: var(--heleguo-bg-primary) !important;
 }
@@ -576,17 +623,6 @@ body.dark-mode .modal-footer {
 }
 body.dark-mode .breadcrumb {
   background: transparent !important;
-}
-body.dark-mode .dropdown-menu {
-  background: #1a1a1a !important;
-  border-color: #333 !important;
-}
-body.dark-mode .dropdown-item {
-  color: #ccc !important;
-}
-body.dark-mode .dropdown-item:hover {
-  background: rgba(255, 107, 53, 0.1) !important;
-  color: var(--heleguo-orange) !important;
 }
 body.dark-mode .close {
   color: #fff !important;
