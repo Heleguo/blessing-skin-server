@@ -1,14 +1,14 @@
 import { getExtraData } from './extra'
 
 export function scrollHander() {
-  const header = document.querySelector('.home-navbar')
+  const header = document.querySelector('.navbar')
   /* istanbul ignore else */
   if (header) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled')
+      if (window.scrollY >= (window.innerHeight * 2) / 3) {
+        header.classList.remove('transparent')
       } else {
-        header.classList.remove('scrolled')
+        header.classList.add('transparent')
       }
     })
   }

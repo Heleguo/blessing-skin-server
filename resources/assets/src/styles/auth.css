@@ -1,212 +1,26 @@
-/* ============================================
-   认证页面样式 - 和乐果风格
-   ============================================ */
-@import './theme.css';
-
-/* 背景装饰 */
-.auth-bg-decoration {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(247, 197, 159, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Logo */
-.login-logo {
-  margin-bottom: 24px;
-  position: relative;
-  z-index: 1;
-}
 .login-logo a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  font-family: 'Inter Tight', sans-serif !important;
-  transition: all 0.3s ease;
+  gap: 8px;
+  font-family: Minecraft;
+  transition: all 0.2s ease-in-out;
 }
+
 .login-logo a:hover {
-  color: var(--heleguo-orange) !important;
+  color: #42a5f5;
 }
+
+/* 登录页 Logo */
 .auth-logo {
-  height: 56px;
+  height: 48px;
   width: auto;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  display: block;
 }
-.login-logo a:hover .auth-logo {
-  transform: scale(1.05);
-}
+
 .auth-logo-text {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--heleguo-text-primary);
-  letter-spacing: -0.5px;
-}
-.login-logo a:hover .auth-logo-text {
-  color: var(--heleguo-orange);
-}
-
-/* 登录卡片 */
-.login-card {
-  background: var(--heleguo-bg-card) !important;
-  border: 1px solid var(--heleguo-border-color) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-.dark-mode .login-card {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-}
-.login-card-body {
-  padding: 32px !important;
-}
-
-/* 表单样式 */
-.login-card-body .form-control {
-  background: var(--heleguo-bg-secondary) !important;
-  border: 1px solid var(--heleguo-border-color) !important;
-  color: var(--heleguo-text-primary) !important;
-  border-radius: 10px !important;
-  padding: 12px 16px !important;
-  height: auto !important;
-  font-size: 15px;
-  transition: all 0.3s ease;
-}
-.login-card-body .form-control:focus {
-  border-color: var(--heleguo-orange) !important;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15) !important;
-}
-.login-card-body .form-control::placeholder {
-  color: var(--heleguo-text-muted);
-}
-.login-card-body .input-group-text {
-  background: var(--heleguo-bg-secondary) !important;
-  border: 1px solid var(--heleguo-border-color) !important;
-  color: var(--heleguo-text-secondary) !important;
-  font-size: 16px !important;
-  padding: 12px 16px !important;
-}
-/* 图标在左侧（prepend） */
-.login-card-body .input-group-prepend .input-group-text {
-  border-radius: 10px 0 0 10px !important;
-  border-right: none !important;
-}
-.login-card-body .input-group-prepend + .form-control {
-  border-radius: 0 10px 10px 0 !important;
-}
-/* 图标在右侧（append） */
-.login-card-body .input-group .form-control:not(:last-child) {
-  border-radius: 10px 0 0 10px !important;
-}
-.login-card-body .input-group-append .input-group-text {
-  border-radius: 0 10px 10px 0 !important;
-  border-left: none !important;
-}
-.login-card-body .input-group:focus-within .input-group-text {
-  border-color: var(--heleguo-orange) !important;
-  color: var(--heleguo-orange) !important;
-}
-
-/* 输入框图标 */
-.login-card-body .input-group-text i.fas {
-  font-size: 16px;
-  width: 1.2em;
-  text-align: center;
-  display: inline-block;
-}
-
-/* 按钮 */
-.login-card-body .btn-primary {
-  background: var(--heleguo-orange) !important;
-  border-color: var(--heleguo-orange) !important;
-  border-radius: 10px !important;
-  padding: 12px !important;
-  font-weight: 600 !important;
-  font-size: 16px;
-  transition: all 0.3s ease !important;
-}
-.login-card-body .btn-primary:hover {
-  background: #e55a2b !important;
-  border-color: #e55a2b !important;
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(255, 107, 53, 0.3) !important;
-}
-
-/* 链接 */
-.login-card-body a {
-  color: var(--heleguo-orange) !important;
-  transition: color 0.2s ease;
-}
-.login-card-body a:hover {
-  color: #e55a2b !important;
-}
-
-/* 底部导航 */
-.auth-footer {
-  text-align: center;
-  margin-top: 24px;
-  position: relative;
-  z-index: 1;
-}
-.auth-footer a {
-  color: var(--heleguo-text-muted) !important;
-  font-size: 14px;
-  transition: color 0.2s ease;
-}
-.auth-footer a:hover {
-  color: var(--heleguo-orange) !important;
-}
-
-/* 验证码样式 */
-.login-card-body .captcha-img {
-  border-radius: 10px;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-.login-card-body .captcha-img:hover {
-  opacity: 0.8;
-}
-
-/* 忘记密码链接 */
-.login-card-body .forgot-password {
-  font-size: 13px;
-}
-
-/* 社交登录 */
-.login-card-body .social-auth-links {
-  margin-top: 16px;
-}
-.login-card-body .social-auth-links .btn {
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 14px;
-}
-
-/* 复选框样式 */
-.login-card-body .custom-checkbox .custom-control-label::before {
-  border-radius: 4px;
-  border-color: var(--heleguo-border-color);
-}
-.login-card-body .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: var(--heleguo-orange);
-  border-color: var(--heleguo-orange);
-}
-
-/* 错误提示 */
-.login-card-body .alert-danger {
-  background: rgba(244, 67, 54, 0.1) !important;
-  border: 1px solid rgba(244, 67, 54, 0.3) !important;
-  color: #F44336 !important;
-  border-radius: 10px;
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: inherit;
 }

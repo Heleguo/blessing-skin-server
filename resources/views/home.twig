@@ -5,222 +5,266 @@
     <link rel="preload" as="image" href="{{ home_pic_url }}">
     <title>{{ site_name }}</title>
     <style>
-      .hp-wrapper {
+      .hp-hero-bg img {
         {% if fixed_bg %}
-          background-color: rgba(0, 0, 0, 0);
-        {% else %}
-          background-image: url('{{ home_pic_url }}');
+          display: none;
         {% endif %}
       }
+      {% if fixed_bg %}
+        .hp-hero { background-image: url('{{ home_pic_url }}'); background-size: cover; background-position: center; }
+      {% endif %}
     </style>
     {{ include('assets.home-css', ignore_missing = true) }}
   </head>
 
-  <body class="hold-transition layout-top-nav">
-    <div class="hp-wrapper" style="position: relative; min-height: 100vh;">
-      {% if fixed_bg %}
-        <div id="fixed-bg" style="background-image: url('{{ home_pic_url }}')"></div>
-      {% endif %}
+  <body class="{{ dark_mode ? 'dark-mode' : '' }}">
+    <!-- Navbar -->
+    <nav class="hp-nav" id="hp-nav">
+      <div class="hp-nav-inner">
+        <a href="{{ url('/') }}" class="hp-nav-brand">
+          <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="hp-nav-logo">
+        </a>
 
-      <!-- ====== 背景叠加层 ====== -->
-      <div class="home-bg-overlay"></div>
-      <div class="home-bg-gradient"></div>
+        <ul class="hp-nav-links" id="hp-nav-links">
+          <li><a href="{{ url('/') }}" class="active">首页</a></li>
+          <li><a href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a></li>
+          {{ include('shared.languages') }}
+        </ul>
 
-      <!-- ====== 浮动粒子 ====== -->
-      <div class="home-particles">
-        {% for i in 1..20 %}
-          <div class="home-particle"
-            style="left: {{ random(100) }}%; top: {{ random(100) }}%; animation-delay: {{ (random(40) / 10) }}s; animation-duration: {{ (4 + random(40) / 10) }}s;">
-          </div>
-        {% endfor %}
-      </div>
-
-      <!-- ====== 导航栏 ====== -->
-      <nav class="navbar navbar-expand fixed-top home-navbar navbar-{{ color_mode }} ml-0"
-        id="home-navbar"
-      >
-        <div class="container">
-          <div class="navbar-header">
-            <a href="{{ url('/') }}" class="navbar-brand home-brand">
-              <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="home-logo">
+        <div class="hp-nav-right">
+          {% if auth_check() %}
+            <a href="{{ url('user') }}" class="hp-btn hp-btn-primary hp-nav-cta" style="padding: 0.5rem 1.5rem; font-size: 0.875rem;">
+              {{ trans('general.user-center') }}
             </a>
-          </div>
+          {% else %}
+            <a href="{{ url('auth/login') }}" class="hp-btn hp-btn-outline hp-nav-cta" style="padding: 0.5rem 1.5rem; font-size: 0.875rem;">
+              登录
+            </a>
+            <a href="{{ url('auth/register') }}" class="hp-btn hp-btn-primary hp-nav-cta" style="padding: 0.5rem 1.5rem; font-size: 0.875rem;">
+              注册
+            </a>
+          {% endif %}
+          <button class="hp-nav-toggle" id="hp-nav-toggle" aria-label="Toggle menu">
+            &#9776;
+          </button>
+        </div>
+      </div>
+    </nav>
 
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav home-nav-links">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a>
-              </li>
+    <!-- Hero Section -->
+    <section class="hp-hero">
+      <div class="hp-hero-bg">
+        <img src="{{ home_pic_url }}" alt="{{ site_name }}">
+        <div class="hp-hero-overlay"></div>
+        <div class="hp-hero-gradient"></div>
+      </div>
 
-              {{ include('shared.languages') }}
+      <!-- Floating Particles -->
+      <div class="hp-hero-particles" id="hp-particles"></div>
 
-              {% if auth_check() %}
-                {{ include('shared.user-menu') }}
-              {% else %}
-                <li class="nav-item">
-                  <a class="nav-link nav-login-btn" href="{{ url('auth/login') }}">
-                    <i class="icon fas fa-sign-in-alt"></i>
-                    {{ trans('general.login') }}
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link nav-register-btn" href="{{ url('auth/register') }}">
-                    {{ trans('general.register') }}
-                  </a>
-                </li>
-              {% endif %}
-            </ul>
+      <div class="hp-hero-content">
+        <div class="animate-slide-up">
+          <span class="hp-hero-badge">Minecraft 服务器</span>
+        </div>
+
+        <h1 class="hp-hero-title animate-slide-up stagger-1">
+          欢迎来到 <span class="text-gradient">{{ site_name }}</span>
+        </h1>
+
+        <p class="hp-hero-subtitle animate-slide-up stagger-2">
+          {{ site_description }}
+        </p>
+
+        {% if server_ip is defined and server_ip %}
+        <div class="hp-hero-ip animate-slide-up stagger-3">
+          <div class="hp-hero-ip-box">
+            <span class="hp-hero-ip-icon">&#9881;</span>
+            <span class="hp-hero-ip-text">{{ server_ip }}</span>
+            <button class="hp-hero-ip-copy" onclick="navigator.clipboard.writeText('{{ server_ip }}'); this.innerHTML='&#10003;'; setTimeout(()=>this.innerHTML='&#128203;',2000)" title="复制IP">
+              &#128203;
+            </button>
           </div>
         </div>
-      </nav>
+        {% endif %}
 
-      <!-- ====== Hero 区域 ====== -->
-      <div class="home-hero">
-        <div class="container">
-          <div class="home-hero-content">
-            <div class="home-hero-badge">Minecraft 皮肤站</div>
-
-            <h1 class="home-hero-title">
-              欢迎来到 <span class="text-gradient">{{ site_name }}</span>
-            </h1>
-
-            <p class="home-hero-subtitle">
-              {{ site_description }}
-            </p>
-
-            <!-- 快捷操作 -->
-            <div class="home-hero-actions">
-              {% if auth_check() %}
-                <a href="{{ url('user') }}" class="home-btn-primary">
-                  <i class="fas fa-user"></i>
-                  {{ trans('general.user-center') }}
-                </a>
-              {% else %}
-                <a href="{{ url('auth/register') }}" class="home-btn-primary">
-                  <i class="fas fa-user-plus"></i>
-                  {{ trans('general.register') }}
-                </a>
-                <a href="{{ url('auth/login') }}" class="home-btn-secondary">
-                  <i class="fas fa-sign-in-alt"></i>
-                  {{ trans('general.login') }}
-                </a>
-              {% endif %}
-              <a href="{{ url('skinlib') }}" class="home-btn-secondary">
-                <i class="fas fa-archive"></i>
-                {{ trans('general.skinlib') }}
-              </a>
-            </div>
-          </div>
+        <div class="hp-hero-actions animate-slide-up stagger-4">
+          {% if auth_check() %}
+            <a href="{{ url('user') }}" class="hp-btn hp-btn-primary">
+              &#127918; {{ trans('general.user-center') }}
+            </a>
+          {% else %}
+            <a href="{{ url('auth/register') }}" class="hp-btn hp-btn-primary">
+              &#127918; 立即加入
+            </a>
+          {% endif %}
+          <a href="{{ url('skinlib') }}" class="hp-btn hp-btn-outline">
+            &#127912; {{ trans('general.skinlib') }}
+          </a>
         </div>
       </div>
 
-      {% if hide_intro %}
-        <div id="copyright" class="without-intro home-copyright">
-          <div class="container">
-            {{ include('shared.copyright') }}
-          </div>
+      <!-- Scroll Indicator -->
+      <div class="hp-hero-scroll">
+        <div class="hp-hero-scroll-mouse">
+          <div class="hp-hero-scroll-dot"></div>
         </div>
-      {% endif %}
-    </div>
+      </div>
+    </section>
 
+    <!-- Features Section -->
     {% if not hide_intro %}
-      <!-- ====== 特色功能介绍 ====== -->
-      <section id="intro" class="home-features">
-        <div class="container">
-          <div class="text-center">
-            <h2 class="home-section-title">
-              {{ trans('index.features.title') }}
-            </h2>
-            <p class="home-section-desc">我们提供全方位的 Minecraft 皮肤管理服务</p>
-            <br>
-            <div class="container-lg">
-              <div class="row">
-                {% for item in ['first', 'second', 'third'] %}
-                  <div class="col-lg-4 mb-4">
-                    <div class="home-feature-card">
-                      <div class="home-feature-icon">
-                        <i class="fas {{ trans("index.features.#{item}.icon") }}" aria-hidden="true"></i>
-                      </div>
-                      <h3 class="home-feature-title">{{ trans("index.features.#{item}.name") }}</h3>
-                      <p class="home-feature-desc">{{ trans("index.features.#{item}.desc")|raw }}</p>
-                    </div>
-                  </div>
-                {% endfor %}
+    <section class="hp-section">
+      <div class="hp-container">
+        <div class="hp-section-header">
+          <h2 class="hp-section-title">
+            服务器 <span class="text-gradient">特色</span>
+          </h2>
+          <p class="hp-section-desc">我们致力于提供最佳的游戏体验</p>
+        </div>
+
+        <div class="hp-features-grid">
+          {% for item in ['first', 'second', 'third'] %}
+          <div class="hp-card card-lift animate-slide-up stagger-{{ loop.index }}">
+            <div class="hp-card-body">
+              <div class="hp-card-icon">
+                <i class="fas {{ trans("index.features.#{item}.icon") }}"></i>
               </div>
+              <h3 class="hp-card-title">{{ trans("index.features.#{item}.name") }}</h3>
+              <p class="hp-card-text">{{ trans("index.features.#{item}.desc")|raw }}</p>
             </div>
           </div>
+          {% endfor %}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ====== 介绍区域 ====== -->
-      <section class="home-about">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-8 mb-4 mb-lg-0">
-              <h2 class="home-about-title">{{ trans('index.introduction', {sitename: site_name}) }}</h2>
-              <p class="home-about-text">
-                在这里，您可以上传、管理和应用您的 Minecraft 皮肤和披风。
-                支持外置登录服务器，让您在没有正版 Minecraft 的情况下也能使用自定义皮肤。
+    <!-- CTA Section -->
+    <section class="hp-section">
+      <div class="hp-container">
+        <div class="hp-cta-card">
+          <div class="hp-cta-grid">
+            <div>
+              <h2 class="hp-section-title" style="text-align:left; margin-bottom:1rem;">
+                {{ trans('index.introduction', {sitename: site_name})|striptags|slice(0, 60) }}
+              </h2>
+              <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                {{ trans('index.introduction', {sitename: site_name})|striptags|slice(0, 120) }}
               </p>
-            </div>
-            <div class="col-lg-4 text-center">
-              <a href="{{ url('auth/register') }}" class="home-btn-primary btn-lg">
-                <i class="fas fa-rocket"></i>
+              <a href="{{ url('auth/register') }}" class="hp-btn hp-btn-primary">
                 {{ trans('index.start') }}
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== Footer ====== -->
-      <footer class="home-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 mb-4 mb-lg-0">
-              <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="home-footer-logo">
-              <p class="home-footer-desc">
-                一个为 Minecraft 玩家提供皮肤托管服务的平台。
-              </p>
-            </div>
-            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-              <h4 class="home-footer-heading">导航</h4>
-              <ul class="home-footer-links">
-                <li><a href="{{ url('/') }}">首页</a></li>
-                <li><a href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
-              <h4 class="home-footer-heading">服务器</h4>
-              <ul class="home-footer-links">
-                <li><a href="https://mc.heleguo.cn" target="_blank">和乐果官网</a></li>
-                <li><a href="https://mc.heleguo.cn" target="_blank">生存服 mc.heleguo.cn</a></li>
-                <li><a href="https://mc.heleguo.cn" target="_blank">粘液科技服 sf.heleguo.cn</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-3 col-md-4">
-              <h4 class="home-footer-heading">链接</h4>
-              <ul class="home-footer-links">
-                <li><a href="https://skin.heleguo.cn" target="_blank">和乐果皮肤站</a></li>
-                <li><a href="https://github.com/bs-community/blessing-skin-server" target="_blank">GitHub</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="home-footer-bottom">
-            <div class="row">
-              <div class="col-md-12">
-                {{ include('shared.copyright') }}
-              </div>
+            <div class="hp-cta-icon-wrap">
+              <div class="hp-cta-icon-glow"></div>
+              <div class="hp-cta-icon">&#127918;</div>
             </div>
           </div>
         </div>
-      </footer>
+      </div>
+    </section>
     {% endif %}
+
+    <!-- Footer -->
+    <footer class="hp-footer">
+      <div class="hp-container">
+        <div class="hp-footer-grid">
+          <div class="hp-footer-brand">
+            <a href="{{ url('/') }}" class="hp-nav-brand" style="margin-bottom:1rem;">
+              <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="hp-footer-logo">
+            </a>
+            <p>{{ site_description }}</p>
+          </div>
+
+          <div class="hp-footer-col">
+            <h3>导航</h3>
+            <ul>
+              <li><a href="{{ url('/') }}">首页</a></li>
+              <li><a href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a></li>
+              {% if auth_check() %}
+                <li><a href="{{ url('user') }}">{{ trans('general.user-center') }}</a></li>
+              {% else %}
+                <li><a href="{{ url('auth/login') }}">{{ trans('general.login') }}</a></li>
+              {% endif %}
+            </ul>
+          </div>
+
+          {% if server_ip is defined and server_ip %}
+          <div class="hp-footer-col">
+            <h3>服务器</h3>
+            <ul>
+              <li>
+                <button onclick="window.open('minecraft://{{ server_ip }}', '_blank')">
+                  {{ site_name }}
+                  <span style="display:block; font-size:0.75rem; opacity:0.7;">{{ server_ip }}</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+
+          <div class="hp-footer-col">
+            <h3>链接</h3>
+            <ul>
+              <li><a href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a></li>
+              <li><a href="https://github.com/bs-community/blessing-skin-server" target="_blank">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hp-footer-bottom">
+          <div class="hp-footer-copyright">
+            &copy; {{ "now"|date("Y") }} {{ site_name }}. All rights reserved.
+          </div>
+          <div class="hp-footer-copyright">
+            {{ include('shared.copyright') }}
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+    // Navbar scroll effect
+    (function() {
+      var nav = document.getElementById('hp-nav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+    })();
+
+    // Mobile nav toggle
+    (function() {
+      var toggle = document.getElementById('hp-nav-toggle');
+      var links = document.getElementById('hp-nav-links');
+      if (toggle && links) {
+        toggle.addEventListener('click', function() {
+          links.classList.toggle('mobile-open');
+        });
+      }
+    })();
+
+    // Floating particles
+    (function() {
+      var container = document.getElementById('hp-particles');
+      if (!container) return;
+      for (var i = 0; i < 20; i++) {
+        var p = document.createElement('div');
+        p.className = 'hp-hero-particle';
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.top = (Math.random() * 100) + '%';
+        p.style.animationDelay = (Math.random() * 4) + 's';
+        p.style.animationDuration = (4 + Math.random() * 4) + 's';
+        container.appendChild(p);
+      }
+    })();
+    </script>
 
     <script type="application/json" id="blessing-extra">
       {{ {transparent_navbar: transparent_navbar}|json_encode|raw }}
     </script>
-
     {{ include('assets.home', ignore_missing = true) }}
     {{ include('shared.foot') }}
   </body>

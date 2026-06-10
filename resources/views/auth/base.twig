@@ -5,10 +5,7 @@
     <title>{% block title %}{% endblock %} - {{ site_name }}</title>
   </head>
 
-  <body class="hold-transition login-page">
-    <!-- 背景装饰 -->
-    <div class="auth-bg-decoration"></div>
-
+  <body class="{{ dark_mode ? 'dark-mode' : '' }} hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
         <a href="{{ url('/') }}">
@@ -17,14 +14,10 @@
         </a>
       </div>
 
-      <div class="card login-card">
+      <div class="card">
         <div class="card-body login-card-body">
           {% block content %}{% endblock %}
         </div>
-      </div>
-
-      <div class="auth-footer">
-        <a href="{{ url('/') }}">&larr; {{ trans('general.back') }}</a>
       </div>
     </div>
 

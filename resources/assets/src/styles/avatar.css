@@ -1,13 +1,7 @@
 .bs-avatar {
-  width: 32px;
-  height: 32px;
+  width: 2.1rem;
+  height: 2.1rem;
   image-rendering: pixelated;
-  border-radius: 8px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  object-fit: cover;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-.user-menu:hover .bs-avatar {
-  border-color: var(--heleguo-orange);
+  border-radius: 2px;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
 }

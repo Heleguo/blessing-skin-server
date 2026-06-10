@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary">
+<aside class="main-sidebar sidebar-{{ sidebar_color }} elevation-3">
   <a href="{{ url('/') }}" class="brand-link text-center">
     <span class="brand-text font-weight-light">{{ site_name }}</span>
   </a>
@@ -18,7 +18,7 @@
           <li class="nav-header">{{ trans('general.explore') }}</li>
           {{ include('shared.side-menu', {type: 'explore'}) }}
           {% if auth_user().admin %}
-            <li class="nav-header" style="color: var(--heleguo-text-muted);">{{ trans('general.manage') }}</li>
+            <li class="nav-header">{{ trans('general.manage') }}</li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('admin') }}">
                 <i class="nav-icon fas fa-cog"></i>
