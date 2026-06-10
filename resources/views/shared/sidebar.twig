@@ -1,6 +1,6 @@
-<aside class="main-sidebar sidebar-{{ sidebar_color }} elevation-3">
+<aside class="main-sidebar sidebar-dark-primary elevation-3">
   <a href="{{ url('/') }}" class="brand-link text-center">
-    <span class="brand-text font-weight-light">{{ site_name }}</span>
+    <span class="brand-text font-weight-light" style="color: var(--heleguo-orange); font-family: 'Inter Tight', sans-serif; font-weight: 800;">{{ site_name }}</span>
   </a>
   <div class="sidebar">
     {{ include('shared.user-panel') }}
@@ -13,12 +13,12 @@
 
         {% if scope == 'user' %}
 
-          <li class="nav-header">{{ trans('general.user-center') }}</li>
+          <li class="nav-header" style="color: var(--heleguo-text-muted);">{{ trans('general.user-center') }}</li>
           {{ include('shared.side-menu', {type: 'user'}) }}
-          <li class="nav-header">{{ trans('general.explore') }}</li>
+          <li class="nav-header" style="color: var(--heleguo-text-muted);">{{ trans('general.explore') }}</li>
           {{ include('shared.side-menu', {type: 'explore'}) }}
           {% if auth_user().admin %}
-            <li class="nav-header">{{ trans('general.manage') }}</li>
+            <li class="nav-header" style="color: var(--heleguo-text-muted);">{{ trans('general.manage') }}</li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('admin') }}">
                 <i class="nav-icon fas fa-cog"></i>
@@ -29,9 +29,9 @@
 
         {% elseif scope == 'admin' %}
 
-          <li class="nav-header">{{ trans('general.admin-panel') }}</li>
+          <li class="nav-header" style="color: var(--heleguo-text-muted);">{{ trans('general.admin-panel') }}</li>
           {{ include('shared.side-menu', {type: 'admin'}) }}
-          <li class="nav-header">{{ trans('general.back') }}</li>
+          <li class="nav-header" style="color: var(--heleguo-text-muted);">{{ trans('general.back') }}</li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('user') }}">
               <i class="nav-icon fas fa-user"></i> &nbsp;

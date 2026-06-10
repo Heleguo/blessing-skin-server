@@ -51,6 +51,6 @@ return [
     'content_policy' => '',
     'transparent_navbar' => 'false',
     'status_code_for_private' => '403',
-    'navbar_color' => 'cyan',
+    'navbar_color' => 'white',
     'sidebar_color' => 'dark-maroon',
 ];

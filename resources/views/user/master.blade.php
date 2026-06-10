@@ -6,7 +6,7 @@
     @yield('style')
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="{{ $dark_mode ? 'dark-mode' : '' }} hold-transition sidebar-mini" style="background: var(--heleguo-bg-primary);">
     <div class="wrapper">
         @include('shared.header')
         @include('shared.sidebar', ['scope' => 'user'])

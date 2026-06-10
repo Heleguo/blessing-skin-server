@@ -17,21 +17,37 @@
   </head>
 
   <body class="hold-transition layout-top-nav">
-    <div class="hp-wrapper">
+    <div class="hp-wrapper" style="position: relative; min-height: 100vh;">
       {% if fixed_bg %}
         <div id="fixed-bg" style="background-image: url('{{ home_pic_url }}')"></div>
       {% endif %}
 
-      <nav class="navbar navbar-expand fixed-top navbar-{{ navbar_color }} navbar-{{ color_mode }}
-        ml-0 {{ transparent_navbar ? 'transparent' }}"
+      <!-- ====== 背景叠加层 ====== -->
+      <div class="home-bg-overlay"></div>
+      <div class="home-bg-gradient"></div>
+
+      <!-- ====== 浮动粒子 ====== -->
+      <div class="home-particles">
+        {% for i in 1..20 %}
+          <div class="home-particle"
+            style="left: {{ random(100) }}%; top: {{ random(100) }}%; animation-delay: {{ (random(40) / 10) }}s; animation-duration: {{ (4 + random(40) / 10) }}s;">
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- ====== 导航栏 ====== -->
+      <nav class="navbar navbar-expand fixed-top home-navbar navbar-{{ color_mode }} ml-0"
+        id="home-navbar"
       >
         <div class="container">
           <div class="navbar-header">
-            <a href="{{ url('/') }}" class="navbar-brand">{{ site_name }}</a>
+            <a href="{{ url('/') }}" class="navbar-brand home-brand">
+              <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="home-logo">
+            </a>
           </div>
 
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav home-nav-links">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a>
               </li>
@@ -39,12 +55,40 @@
               {{ include('shared.languages') }}
 
               {% if auth_check() %}
-                {{ include('shared.user-menu') }}
+                <li class="nav-item dropdown user-menu">
+                  <a href="#" class="nav-link d-flex align-items-center" data-toggle="dropdown">
+                    <picture>
+                      <source srcset="{{ avatar }}" type="image/webp">
+                      <img src="{{ avatar_png }}" class="bs-avatar mr-2" alt="User Image">
+                    </picture>
+                    <span class="d-none d-md-inline" data-mark="nickname">
+                      {{ user.nickname ?? user.email }}
+                    </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    {% for item in menu %}
+                      {% if item.link == '#divider' %}
+                        <div class="dropdown-divider"></div>
+                      {% else %}
+                        <a class="dropdown-item" href="{{ item.link }}">{{ item.label }}</a>
+                      {% endif %}
+                    {% endfor %}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" id="logout-button">
+                      {{ trans('general.logout') }}
+                    </a>
+                  </div>
+                </li>
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url('auth/login') }}">
+                  <a class="nav-link nav-login-btn" href="{{ url('auth/login') }}">
                     <i class="icon fas fa-sign-in-alt"></i>
                     {{ trans('general.login') }}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav-register-btn" href="{{ url('auth/register') }}">
+                    {{ trans('general.register') }}
                   </a>
                 </li>
               {% endif %}
@@ -53,28 +97,48 @@
         </div>
       </nav>
 
-      <div class="container">
-        <div class="splash">
-          <h1 class="splash-head">{{ site_name }}</h1>
-          <p class="splash-subhead">
-            {{ site_description }}
-          </p>
-          <p>
-            {% if auth_check() %}
-              <a href="{{ url('user') }}" class="main-button">
-                {{ trans('general.user-center') }}
+      <!-- ====== Hero 区域 ====== -->
+      <div class="home-hero">
+        <div class="container">
+          <div class="home-hero-content">
+            <div class="home-hero-badge">Minecraft 皮肤站</div>
+
+            <h1 class="home-hero-title">
+              欢迎来到 <span class="text-gradient">{{ site_name }}</span>
+            </h1>
+
+            <p class="home-hero-subtitle">
+              {{ site_description }}
+            </p>
+
+            <!-- 快捷操作 -->
+            <div class="home-hero-actions">
+              {% if auth_check() %}
+                <a href="{{ url('user') }}" class="home-btn-primary">
+                  <i class="fas fa-user"></i>
+                  {{ trans('general.user-center') }}
+                </a>
+              {% else %}
+                <a href="{{ url('auth/register') }}" class="home-btn-primary">
+                  <i class="fas fa-user-plus"></i>
+                  {{ trans('general.register') }}
+                </a>
+                <a href="{{ url('auth/login') }}" class="home-btn-secondary">
+                  <i class="fas fa-sign-in-alt"></i>
+                  {{ trans('general.login') }}
+                </a>
+              {% endif %}
+              <a href="{{ url('skinlib') }}" class="home-btn-secondary">
+                <i class="fas fa-archive"></i>
+                {{ trans('general.skinlib') }}
               </a>
-            {% else %}
-              <a href="{{ url('auth/register') }}" class="main-button">
-                {{ trans('general.register') }}
-              </a>
-            {% endif %}
-          </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {% if hide_intro %}
-        <div id="copyright" class="without-intro">
+        <div id="copyright" class="without-intro home-copyright">
           <div class="container">
             {{ include('shared.copyright') }}
           </div>
@@ -83,52 +147,106 @@
     </div>
 
     {% if not hide_intro %}
-      <div id="intro">
+      <!-- ====== 特色功能介绍 ====== -->
+      <section id="intro" class="home-features">
         <div class="container">
           <div class="text-center">
-            <h1>{{ trans('index.features.title') }}</h1>
-            <br>
+            <h2 class="home-section-title">
+              {{ trans('index.features.title') }}
+            </h2>
+            <p class="home-section-desc">我们提供全方位的 Minecraft 皮肤管理服务</p>
             <br>
             <div class="container-lg">
               <div class="row">
                 {% for item in ['first', 'second', 'third'] %}
-                  <div class="col-lg">
-                    <i class="fas {{ trans("index.features.#{item}.icon") }} mb-3" aria-hidden="true"></i>
-                    <h3>{{ trans("index.features.#{item}.name") }}</h3>
-                    <p>{{ trans("index.features.#{item}.desc")|raw }}</p>
+                  <div class="col-lg-4 mb-4">
+                    <div class="home-feature-card">
+                      <div class="home-feature-icon">
+                        <i class="fas {{ trans("index.features.#{item}.icon") }}" aria-hidden="true"></i>
+                      </div>
+                      <h3 class="home-feature-title">{{ trans("index.features.#{item}.name") }}</h3>
+                      <p class="home-feature-desc">{{ trans("index.features.#{item}.desc")|raw }}</p>
+                    </div>
                   </div>
                 {% endfor %}
               </div>
             </div>
           </div>
-          <br>
         </div>
-      </div>
-      <div id="footer-wrap">
+      </section>
+
+      <!-- ====== 介绍区域 ====== -->
+      <section class="home-about">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-6 mb-2">
-              {{ trans('index.introduction', {sitename: site_name}) }}
+          <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+              <h2 class="home-about-title">{{ trans('index.introduction', {sitename: site_name}) }}</h2>
+              <p class="home-about-text">
+                在这里，您可以上传、管理和应用您的 Minecraft 皮肤和披风。
+                支持外置登录服务器，让您在没有正版 Minecraft 的情况下也能使用自定义皮肤。
+              </p>
             </div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-2 d-flex justify-content-center align-items-center">
-              <a href="{{ url('auth/register') }}" class="main-button">
+            <div class="col-lg-4 text-center">
+              <a href="{{ url('auth/register') }}" class="home-btn-primary btn-lg">
+                <i class="fas fa-rocket"></i>
                 {{ trans('index.start') }}
               </a>
             </div>
           </div>
         </div>
-      </div>
-      <div id="copyright" class="with-intro">
+      </section>
+
+      <!-- ====== Footer ====== -->
+      <footer class="home-footer">
         <div class="container">
-          {{ include('shared.copyright') }}
+          <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="home-footer-logo">
+              <p class="home-footer-desc">
+                一个为 Minecraft 玩家提供皮肤托管服务的平台。
+              </p>
+            </div>
+            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+              <h4 class="home-footer-heading">导航</h4>
+              <ul class="home-footer-links">
+                <li><a href="{{ url('/') }}">首页</a></li>
+                <li><a href="{{ url('skinlib') }}">{{ trans('general.skinlib') }}</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+              <h4 class="home-footer-heading">服务器</h4>
+              <ul class="home-footer-links">
+                <li><a href="https://mc.heleguo.cn" target="_blank">和乐果官网</a></li>
+                <li><a href="https://mc.heleguo.cn" target="_blank">生存服 mc.heleguo.cn</a></li>
+                <li><a href="https://mc.heleguo.cn" target="_blank">粘液科技服 sf.heleguo.cn</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-3 col-md-4">
+              <h4 class="home-footer-heading">链接</h4>
+              <ul class="home-footer-links">
+                <li><a href="https://skin.heleguo.cn" target="_blank">和乐果皮肤站</a></li>
+                <li><a href="https://github.com/bs-community/blessing-skin-server" target="_blank">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="home-footer-bottom">
+            <div class="row">
+              <div class="col-md-6">
+                {{ include('shared.copyright') }}
+              </div>
+              <div class="col-md-6 text-md-right">
+                <a href="https://beian.miit.gov.cn/" target="_blank" class="home-footer-beian">桂ICP备2022003332号-1</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </footer>
     {% endif %}
 
     <script type="application/json" id="blessing-extra">
       {{ {transparent_navbar: transparent_navbar}|json_encode|raw }}
     </script>
+
     {{ include('assets.home', ignore_missing = true) }}
     {{ include('shared.foot') }}
   </body>

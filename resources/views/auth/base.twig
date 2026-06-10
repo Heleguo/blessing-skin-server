@@ -6,15 +6,25 @@
   </head>
 
   <body class="hold-transition login-page">
+    <!-- 背景装饰 -->
+    <div class="auth-bg-decoration"></div>
+
     <div class="login-box">
       <div class="login-logo">
-        <a href="{{ url('/') }}">{{ site_name }}</a>
+        <a href="{{ url('/') }}">
+          <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="auth-logo">
+          <span class="auth-logo-text">{{ site_name }}</span>
+        </a>
       </div>
 
-      <div class="card">
+      <div class="card login-card">
         <div class="card-body login-card-body">
           {% block content %}{% endblock %}
         </div>
+      </div>
+
+      <div class="auth-footer">
+        <a href="{{ url('/') }}">&larr; {{ trans('general.back') }}</a>
       </div>
     </div>
 
