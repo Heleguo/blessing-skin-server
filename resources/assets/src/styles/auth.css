@@ -17,30 +17,26 @@
 }
 
 /* Login logo */
+.login-logo {
+  margin-bottom: 16px;
+}
 .login-logo a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: Minecraft;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--text-primary, #1a1a1a);
   transition: color 0.3s;
 }
-
 .login-logo a:hover {
   color: #FF6B35;
 }
-
 .auth-logo-img {
-  height: 40px;
+  height: 32px;
   width: auto;
   object-fit: contain;
-  transition: transform 0.3s;
-}
-
-.login-logo a:hover .auth-logo-img {
-  transform: scale(1.05);
 }
 
 /* Card */
