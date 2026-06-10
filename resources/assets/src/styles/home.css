@@ -410,6 +410,19 @@ body {
 .home-footer-bottom .copyright-text a {
   color: var(--heleguo-orange);
 }
+.home-footer-bottom .copyright-text .copyright-extra {
+  display: inline;
+  color: var(--heleguo-text-muted);
+  font-size: 13px;
+  margin-left: 4px;
+}
+.home-footer-bottom .copyright-text .copyright-extra a {
+  color: var(--heleguo-text-muted) !important;
+  text-decoration: underline;
+}
+.home-footer-bottom .copyright-text .copyright-extra a:hover {
+  color: var(--heleguo-orange) !important;
+}
 
 /* ============================================
    动画关键帧
