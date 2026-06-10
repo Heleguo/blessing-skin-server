@@ -21,7 +21,10 @@
     <!-- Navbar -->
     <nav class="hp-nav" id="hp-nav">
       <div class="hp-nav-inner">
-        <a href="{{ url('/') }}" class="hp-nav-brand">{{ site_name }}</a>
+        <a href="{{ url('/') }}" class="hp-nav-brand">
+          <img src="https://cdn.heleguo.cn/logo/logo.png" alt="{{ site_name }}" class="hp-nav-logo">
+          {{ site_name }}
+        </a>
 
         <ul class="hp-nav-links" id="hp-nav-links">
           <li><a href="{{ url('/') }}" class="active">首页</a></li>
